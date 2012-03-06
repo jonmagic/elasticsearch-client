@@ -156,6 +156,17 @@ module ElasticSearch
       end
     end
 
+    # Remove all of a type from this index
+    #
+    #   type - the type of document to be removed
+    #
+    # Returns a hash, the parsed response body from elasticsearch
+    def remove_all(type)
+      delete do |req|
+        req.url "#{@name}/#{type}"
+      end
+    end
+
     # Remove a collection of documents matched by a query
     #
     #   types   - the type or types to query

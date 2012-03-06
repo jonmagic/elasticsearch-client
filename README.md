@@ -16,13 +16,19 @@ Create connection:
 
 Index a document:
 
+    type = 'tweet'
     doc = {:id => 'abcd', :foo => 'bar'}
-    es.add(index, doc[:id], doc)
+    es.add(type, doc[:id], doc)
 
 Get a document:
 
     id = '1234'
-    es.mget(id)
+    es.mget(type, [id])
+
+Get documents:
+
+    id2 = 'abcd'
+    es.mget(type, [id, id2])
 
 Search:
 
@@ -38,11 +44,19 @@ Search:
         }
       }
     }
-    es.search(index, query)
+    es.search(type, query)
 
 Remove record:
 
-    es.remove_by_query(index, :term => {:id => id})
+    es.remove(type, id)
+
+Remove by query:
+
+    es.remove_by_query(type, :term => {:foo => 'bar'})
+
+Remove all of type:
+
+    es.remove_all(type)
 
 ## Note on Patches/Pull Requests
 
