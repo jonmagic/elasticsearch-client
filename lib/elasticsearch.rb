@@ -183,17 +183,18 @@ module ElasticSearch
     # Create a new index in elasticsearch
     #
     #   name           - the name of the index to be created
+    #   server         - URL of the server to create the index on
     #   create_options - a hash of index creation options
     #
     # Returns a new ElasticSearch::Index instance
-    def self.create(name, create_options={})
-      conn = ElasticSearch.get_connection
+    def self.create(name, server, create_options={})
+      conn = ElasticSearch.get_connection(server)
       conn.put do |req|
         req.url "/#{name}"
         req.body = create_options
       end
 
-      new(name)
+      new(name, server)
     end
   end
 end
