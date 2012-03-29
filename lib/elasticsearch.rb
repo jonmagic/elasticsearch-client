@@ -163,7 +163,7 @@ module ElasticSearch
     # Returns a hash, the parsed response body from elasticsearch
     def remove_all(type)
       delete do |req|
-        req.url "#{@name}/#{type}"
+        req.url "#{@name}/#{type}/_query", :q => '*'
       end
     end
 
