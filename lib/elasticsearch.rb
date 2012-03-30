@@ -182,6 +182,30 @@ module ElasticSearch
       end
     end
 
+    # Fetch the mappings defined for this index
+    #
+    #   types - the type or types to query
+    #
+    # Returns a hash, the parsed response body from elasticsearch
+    def get_mapping(types)
+      get do |req|
+        req.url "#{@name}/#{types}/_mapping"
+      end
+    end
+
+    # Adds mappings to the index
+    #
+    #   type    - the type we're modifying
+    #   mapping - the new mapping to merge into the index
+    #
+    # Returns a hash, the parsed response body from elasticsearch
+    def put_mapping(type, mapping)
+      put do |req|
+        req.url "#{@name}/#{type}/_mapping"
+        req.body = mapping
+      end
+    end
+
     # Create a new index in elasticsearch
     #
     #   name           - the name of the index to be created
