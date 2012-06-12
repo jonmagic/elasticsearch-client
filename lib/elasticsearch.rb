@@ -1,5 +1,6 @@
 require "elasticsearch/version"
 require 'faraday'
+require 'faraday_middleware'
 require 'yajl'
 require 'time'
 
@@ -20,7 +21,8 @@ module ElasticSearch
       # TODO: add timeout middleware
       builder.request  :json
       # builder.response :logger
-      builder.use JSONResponse
+      builder.response :json, :content_type => /\bjson$/
+
       builder.adapter :excon
     end
   end
