@@ -15,11 +15,10 @@ describe ElasticSearch::Error do
   subject { ElasticSearch::Error.new }
 
   it "subclasses StandardError" do
-    subject.methods.should include("backtrace")
-    subject.methods.should include("exception")
-    subject.methods.should include("message")
-    subject.methods.should include("set_backtrace")
-    subject.methods.should include("to_str")
+    subject.methods.should include(:backtrace)
+    subject.methods.should include(:exception)
+    subject.methods.should include(:message)
+    subject.methods.should include(:set_backtrace)
   end
 end
 
