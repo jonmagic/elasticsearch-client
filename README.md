@@ -6,57 +6,75 @@ ElasticSearch ruby client. Credit goes to my coworkers at GitHub, I just turned 
 
 Add to Gemfile
 
-    gem 'elasticsearch-client', :require => 'elasticsearch'
+```ruby
+gem 'elasticsearch-client', :require => 'elasticsearch'
+```
 
 Create connection:
 
-    index = 'twitter'
-    url = 'http://localhost:9200'
-    es = ElasticSearch::Index.new(index, url)
+```ruby
+index = 'twitter'
+url = 'http://localhost:9200'
+es = ElasticSearch::Index.new(index, url)
+```
 
 Index a document:
 
-    type = 'tweet'
-    doc = {:id => 'abcd', :foo => 'bar'}
-    es.add(type, doc[:id], doc)
+```ruby
+type = 'tweet'
+doc = {:id => 'abcd', :foo => 'bar'}
+es.add(type, doc[:id], doc)
+```
 
 Get a document:
 
-    id = '1234'
-    es.mget(type, [id])
+```ruby
+id = '1234'
+es.mget(type, [id])
+```
 
 Get documents:
 
-    id2 = 'abcd'
-    es.mget(type, [id, id2])
+```ruby
+id2 = 'abcd'
+es.mget(type, [id, id2])
+```
 
 Search:
 
-    query = {
-      :query => {
-        :bool => {
-          :must => {
-            :query_string => {
-              :default_field => '_all',
-              :query => 'foobar!',
-            }
-          }
+```ruby
+query = {
+  :query => {
+    :bool => {
+      :must => {
+        :query_string => {
+          :default_field => '_all',
+          :query => 'foobar!',
         }
       }
     }
-    es.search(type, query)
+  }
+}
+es.search(type, query)
+```
 
 Remove record:
 
-    es.remove(type, id)
+```ruby
+es.remove(type, id)
+```
 
 Remove by query:
 
-    es.remove_by_query(type, :term => {:foo => 'bar'})
+```ruby
+es.remove_by_query(type, :term => {:foo => 'bar'})
+```
 
 Remove all of type:
 
-    es.remove_all(type)
+```ruby
+es.remove_all(type)
+```
 
 ## Note on Patches/Pull Requests
 
